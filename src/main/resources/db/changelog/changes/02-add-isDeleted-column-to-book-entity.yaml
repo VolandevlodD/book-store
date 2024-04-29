@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: add-isDeleted-column-to-book-entity
+      id: add-is_deleted-column-to-books-table
       author: VolandevlodD
       changes:
         - addColumn:
