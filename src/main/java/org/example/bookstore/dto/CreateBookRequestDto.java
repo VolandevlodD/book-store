@@ -8,13 +8,10 @@ import lombok.Data;
 
 @Data
 public class CreateBookRequestDto {
-    @NotNull
     @NotBlank
     private String title;
-    @NotNull
     @NotBlank
     private String author;
-    @NotNull
     @NotBlank
     private String isbn;
     @NotNull
