@@ -5,6 +5,7 @@ import org.example.bookstore.dto.BookDto;
 import org.example.bookstore.dto.CreateBookRequestDto;
 import org.example.bookstore.model.Book;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,5 +13,7 @@ import org.springframework.stereotype.Component;
 public interface BookMapper {
     BookDto toDto(Book book);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
     Book toModel(CreateBookRequestDto requestDto);
 }
