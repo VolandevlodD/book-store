@@ -5,17 +5,18 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import lombok.Data;
+import org.hibernate.validator.constraints.ISBN;
 
 @Data
 public class CreateBookRequestDto {
-    @NotBlank
+    @NotBlank(message = "cannot be blank")
     private String title;
-    @NotBlank
+    @NotBlank(message = "cannot be blank")
     private String author;
-    @NotBlank
+    @ISBN(message = "Invalid ISBN format")
     private String isbn;
-    @NotNull
-    @PositiveOrZero
+    @NotNull(message = "cannot be null")
+    @PositiveOrZero(message = "must be positive or zero")
     private BigDecimal price;
     private String description;
     private String coverImage;
