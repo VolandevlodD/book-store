@@ -14,6 +14,7 @@ public class CreateBookRequestDto {
     @NotBlank(message = "cannot be blank")
     private String author;
     @ISBN(message = "Invalid ISBN format")
+    @NotNull(message = "cannot be null")
     private String isbn;
     @NotNull(message = "cannot be null")
     @PositiveOrZero(message = "must be positive or zero")
