@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class CustomGlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Object> handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException ex) {
         List<String> errors =
                 ex.getBindingResult().getAllErrors().stream().map(this::getErrorMessage).toList();
         return getResponseEntity(HttpStatus.BAD_REQUEST, errors);
@@ -28,7 +29,8 @@ public class CustomGlobalExceptionHandler {
     }
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public ResponseEntity<Object> handleSqlIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex) {
+    public ResponseEntity<Object> handleSqlIntegrityConstraintViolationException(
+            SQLIntegrityConstraintViolationException ex) {
         return getResponseEntity(HttpStatus.CONFLICT, ex.getMessage());
     }
 
