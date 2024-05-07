@@ -13,8 +13,8 @@ public class CreateBookRequestDto {
     private String title;
     @NotBlank(message = "cannot be blank")
     private String author;
-    @ISBN(message = "Invalid ISBN format")
     @NotNull(message = "cannot be null")
+    @ISBN(message = "Invalid ISBN format")
     private String isbn;
     @NotNull(message = "cannot be null")
     @PositiveOrZero(message = "must be positive or zero")
