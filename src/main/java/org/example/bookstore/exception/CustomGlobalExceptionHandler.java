@@ -34,6 +34,11 @@ public class CustomGlobalExceptionHandler {
         return getResponseEntity(HttpStatus.CONFLICT, ex.getMessage());
     }
 
+    @ExceptionHandler(RegistrationException.class)
+    public ResponseEntity<Object> handleRegistrationException(RegistrationException ex) {
+        return getResponseEntity(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
     private String getErrorMessage(ObjectError e) {
         if (e instanceof FieldError fieldError) {
             String field = fieldError.getField();

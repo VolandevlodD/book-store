@@ -1,0 +1,18 @@
+package org.example.bookstore.mapper;
+
+import org.example.bookstore.config.MapperConfig;
+import org.example.bookstore.dto.CreateUserRequestDto;
+import org.example.bookstore.dto.UserDto;
+import org.example.bookstore.model.User;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.springframework.stereotype.Component;
+
+@Component
+@Mapper(config = MapperConfig.class)
+public interface UserMapper {
+    UserDto toDto(User user);
+
+    @Mapping(target = "id", ignore = true)
+    User toModel(CreateUserRequestDto createUserRequestDto);
+}
