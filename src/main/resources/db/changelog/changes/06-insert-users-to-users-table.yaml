@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-users-to-users-table
+      author: VolandevlodD
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "john.doe@example.com"
+              - column:
+                  name: password
+                  value: "$2a$10$9lBjRhvyGqIy5gUC0roXg.nDvm4XTAic4fVsN5O.KYGTiUcl.aXYC"
+              - column:
+                  name: first_name
+                  value: "John"
+              - column:
+                  name: last_name
+                  value: "Doe"
+              - column:
+                  name: shipping_address
+                  value: "123 Main St, Anytown, USA, 12345"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "apumagrelli@example.com"
+              - column:
+                  name: password
+                  value: "$2a$10$FXHMxlEVo2YTlxqXfAU3EedNaP50ANPdo7N.I3T.0dsEswD5nHFcC"
+              - column:
+                  name: first_name
+                  value: "Apu"
+              - column:
+                  name: last_name
+                  value: "Magarelli"
+              - column:
+                  name: shipping_address
+                  value: "456 Elm St, Othertown, USA, 54321"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "mohinder@example.com"
+              - column:
+                  name: password
+                  value: "$2a$10$u9284JFVFg.z/xQMlSELsuVXOEKAZzXErQN5qPv6pxcXLK.4wU2uC"
+              - column:
+                  name: first_name
+                  value: "Mohinder"
+              - column:
+                  name: last_name
+                  value: "Paul Sikh"
+              - column:
+                  name: shipping_address
+                  value: "789 Holy St, Anycity, India, 67890"

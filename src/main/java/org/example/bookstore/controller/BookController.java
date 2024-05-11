@@ -10,6 +10,8 @@ import org.example.bookstore.dto.CreateBookRequestDto;
 import org.example.bookstore.service.BookService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+@EnableMethodSecurity
 @Tag(name = "Books management", description = "Endpoints to manage books")
 @RestController
 @RequestMapping("/books")
@@ -27,12 +30,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookController {
     private final BookService bookService;
 
+    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Get all books", description = "Get a list of available books")
     @GetMapping
     public List<BookDto> getAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Get a book by ID", description = "Get details of a specific book by its"
             + " ID")
     @GetMapping("/{id}")
@@ -40,6 +45,7 @@ public class BookController {
         return bookService.findById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Create a new book", description = "Create a new book entry")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -47,6 +53,7 @@ public class BookController {
         return bookService.save(bookDto);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update a book by ID", description = "Update details of a specific book "
             + "by its ID")
     @PutMapping("/{id}")
@@ -55,6 +62,7 @@ public class BookController {
         return bookService.update(id, bookDto);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Delete a book by ID", description = "Delete a specific book by its ID")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
