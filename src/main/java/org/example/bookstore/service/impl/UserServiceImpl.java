@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         Role role = roleRepository
                 .findByRole(Role.RoleName.USER)
                 .orElseThrow(() ->
-                        new RegistrationException("Can't register user with this role"));
+                        new RegistrationException("Can't register user, unable to find role"));
         user.setRoles(Set.of(role));
         User dbUser = userRepository.save(user);
         return userMapper.toDto(dbUser);

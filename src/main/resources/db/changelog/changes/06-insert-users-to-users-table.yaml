@@ -57,3 +57,4 @@ databaseChangeLog:
               - column:
                   name: shipping_address
                   value: "789 Holy St, Anycity, India, 67890"
+                  
