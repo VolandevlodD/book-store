@@ -9,6 +9,7 @@ import org.example.bookstore.dto.UserDto;
 import org.example.bookstore.dto.UserLoginRequestDto;
 import org.example.bookstore.dto.UserLoginResponseDto;
 import org.example.bookstore.exception.RegistrationException;
+import org.example.bookstore.security.AuthenticationService;
 import org.example.bookstore.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Authentication", description = "Endpoints for user authentication")
 public class AuthenticationController {
     private final UserService userService;
+    private final AuthenticationService authenticationService;
 
     @Operation(summary = "Register a new user")
     @PostMapping("/register")
@@ -32,6 +34,6 @@ public class AuthenticationController {
     @Operation(summary = "Login a user")
     @PostMapping("/login")
     public UserLoginResponseDto login(@RequestBody @Valid UserLoginRequestDto requestDto) {
-        return null;
+        return authenticationService.authenticate(requestDto);
     }
 }
