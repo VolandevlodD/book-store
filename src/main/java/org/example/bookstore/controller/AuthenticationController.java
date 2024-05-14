@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.bookstore.dto.CreateUserRequestDto;
 import org.example.bookstore.dto.UserDto;
+import org.example.bookstore.dto.UserLoginRequestDto;
+import org.example.bookstore.dto.UserLoginResponseDto;
 import org.example.bookstore.exception.RegistrationException;
 import org.example.bookstore.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,5 +27,11 @@ public class AuthenticationController {
     public UserDto register(@RequestBody @Valid CreateUserRequestDto createUserRequestDto)
             throws RegistrationException {
         return userService.save(createUserRequestDto);
+    }
+
+    @Operation(summary = "Login a user")
+    @PostMapping("/login")
+    public UserLoginResponseDto login(@RequestBody @Valid UserLoginRequestDto requestDto) {
+        return null;
     }
 }

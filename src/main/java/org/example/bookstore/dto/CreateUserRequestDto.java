@@ -7,7 +7,7 @@ import org.example.bookstore.annotation.validation.FieldMatch;
 
 @FieldMatch(first = "password", second = "repeatPassword", message = "Passwords do not match")
 public record CreateUserRequestDto(
-        @Email
+        @Email(message = "Invalid email format")
         @NotBlank(message = "Email is required")
         String email,
 
