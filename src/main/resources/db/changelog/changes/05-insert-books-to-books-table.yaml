@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-books-to-books-table
+      author: VolandevlodD
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column: { name: title, value: "The Alchemist" }
+              - column: { name: author, value: "Paulo Coelho" }
+              - column: { name: isbn, value: "9780062315007" }
+              - column: { name: price, value: "12.99" }
+              - column: { name: description, value: "A philosophical novel about a shepherd named Santiago who travels from Spain to Egypt in search of a treasure." }
+              - column: { name: cover_image, value: "http://example.com/thealchemist.jpg" }
+        - insert:
+            tableName: books
+            columns:
+              - column: { name: title, value: "The Da Vinci Code" }
+              - column: { name: author, value: "Dan Brown" }
+              - column: { name: isbn, value: "9780307474278" }
+              - column: { name: price, value: "14.99" }
+              - column: { name: description, value: "A thriller novel that follows symbologist Robert Langdon as he investigates a murder in the Louvre Museum and discovers a hidden secret that could shake the foundations of Christianity." }
+              - column: { name: cover_image, value: "http://example.com/thedavincicode.jpg" }
+        - insert:
+            tableName: books
+            columns:
+              - column: { name: title, value: "The Shining" }
+              - column: { name: author, value: "Stephen King" }
+              - column: { name: isbn, value: "9780307743657" }
+              - column: { name: price, value: "11.49" }
+              - column: { name: description, value: "A horror novel that follows Jack Torrance, an aspiring writer and recovering alcoholic, who accepts a job as the winter caretaker of the Overlook Hotel, where sinister forces start to influence him." }
+              - column: { name: cover_image, value: "http://example.com/theshining.jpg" }
