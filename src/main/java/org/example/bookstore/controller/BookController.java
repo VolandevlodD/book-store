@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.example.bookstore.dto.BookDto;
+import org.example.bookstore.dto.BookDtoWithoutCategoryIds;
 import org.example.bookstore.dto.CreateBookRequestDto;
 import org.example.bookstore.service.BookService;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,7 @@ public class BookController {
     @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Get all books", description = "Get a list of available books")
     @GetMapping
-    public List<BookDto> getAll(Pageable pageable) {
+    public List<BookDtoWithoutCategoryIds> getAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 

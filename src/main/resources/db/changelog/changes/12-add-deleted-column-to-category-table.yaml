@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-deleted-column-to-category-table
+      author: VolandevlodD
+      changes:
+        - addColumn:
+            tableName: categories
+            columns:
+              - column:
+                  name: deleted
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
