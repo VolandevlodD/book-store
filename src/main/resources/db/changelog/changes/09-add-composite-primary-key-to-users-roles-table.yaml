@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-composite-pk-users-roles
+      author: your_name_here
+      changes:
+        - addPrimaryKey:
+            columnNames: user_id, role_id
+            constraintName: pk_users_roles
+            tableName: users_roles

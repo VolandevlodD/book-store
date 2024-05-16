@@ -15,4 +15,5 @@ databaseChangeLog:
       file: db/changelog/changes/07-insert-roles-to-roles-table.yaml
   - include:
       file: db/changelog/changes/08-assign-roles-to-users.yaml
-      
+  - include:
+      file: db/changelog/changes/09-add-composite-primary-key-to-users-roles-table.yaml
