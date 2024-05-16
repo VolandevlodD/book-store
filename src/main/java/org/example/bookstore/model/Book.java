@@ -46,7 +46,7 @@ public class Book {
 
     @Column(nullable = false, name = "is_deleted")
     private boolean deleted = false;
-
+  
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany
