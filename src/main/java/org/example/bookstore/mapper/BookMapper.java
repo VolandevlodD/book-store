@@ -35,4 +35,13 @@ public interface BookMapper {
     @Mapping(target = "deleted", ignore = true)
     @Mapping(target = "categories", ignore = true)
     Book toModel(CreateBookRequestDto requestDto);
+
+    @AfterMapping
+    default void setCategoriesByIds(CreateBookRequestDto bookDto, @MappingTarget Book book) {
+        Set<Category> categories = bookDto.getCategoryIds()
+                .stream()
+                .map(Category::new)
+                .collect(Collectors.toSet());
+        book.setCategories(categories);
+    }
 }

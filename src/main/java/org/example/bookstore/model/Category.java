@@ -7,9 +7,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SoftDelete;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "categories")
 @SoftDelete
@@ -22,4 +24,8 @@ public class Category {
     private String name;
 
     private String description;
+
+    public Category(Long id) {
+        this.id = id;
+    }
 }
