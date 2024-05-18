@@ -1,0 +1,104 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-categories-to-categories-table
+      author: VolandevlodD
+      changes:
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: Fiction
+              - column:
+                  name: description
+                  value: Fiction books
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: Non-Fiction
+              - column:
+                  name: description
+                  value: Non-fiction books
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: Science Fiction
+              - column:
+                  name: description
+                  value: Books about speculative science and futuristic concepts
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: Mystery
+              - column:
+                  name: description
+                  value: Books focused on solving mysteries and crimes
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: Fantasy
+              - column:
+                  name: description
+                  value: Books set in imaginary worlds with magical elements
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: Romance
+              - column:
+                  name: description
+                  value: Stories about romantic relationships and love
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: Horror
+              - column:
+                  name: description
+                  value: Books intended to frighten, scare, or disgust the reader
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: Biography
+              - column:
+                  name: description
+                  value: Accounts of someone's life written by another person
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: History
+              - column:
+                  name: description
+                  value: Books documenting past events, societies, and civilizations
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: Self-Help
+              - column:
+                  name: description
+                  value: Books providing guidance and advice on personal growth
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: Travel
+              - column:
+                  name: description
+                  value: Guides and narratives about exploring different places

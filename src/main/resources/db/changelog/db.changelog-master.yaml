@@ -17,3 +17,13 @@ databaseChangeLog:
       file: db/changelog/changes/08-assign-roles-to-users.yaml
   - include:
       file: db/changelog/changes/09-add-composite-primary-key-to-users-roles-table.yaml
+  - include:
+      file: db/changelog/changes/10-create-categories-table.yaml
+  - include:
+      file: db/changelog/changes/11-create-books-categories-table.yaml
+  - include:
+      file: db/changelog/changes/12-add-deleted-column-to-category-table.yaml
+  - include:
+      file: db/changelog/changes/13-insert-categories-to-categories-table.yaml
+  - include:
+      file: db/changelog/changes/14-assign-books-to-categories.yaml

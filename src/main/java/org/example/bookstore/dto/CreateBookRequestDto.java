@@ -1,9 +1,11 @@
 package org.example.bookstore.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
+import java.util.List;
 import lombok.Data;
 import org.hibernate.validator.constraints.ISBN;
 
@@ -21,4 +23,7 @@ public class CreateBookRequestDto {
     private BigDecimal price;
     private String description;
     private String coverImage;
+    @NotEmpty(message = "Category IDs cannot be empty")
+    private List<@PositiveOrZero(
+            message = "Category ID must be positive or zero") Long> categoryIds;
 }
