@@ -15,4 +15,3 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT b FROM Book b LEFT JOIN FETCH b.categories WHERE b.id = :id")
     Optional<Book> findByIdWithCategories(@Param("id") Long id);
 }
-
