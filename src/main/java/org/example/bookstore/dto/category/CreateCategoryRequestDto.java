@@ -1,4 +1,4 @@
-package org.example.bookstore.dto;
+package org.example.bookstore.dto.category;
 
 import jakarta.validation.constraints.NotBlank;
 

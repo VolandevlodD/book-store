@@ -4,10 +4,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.bookstore.dto.CreateUserRequestDto;
-import org.example.bookstore.dto.UserDto;
-import org.example.bookstore.dto.UserLoginRequestDto;
-import org.example.bookstore.dto.UserLoginResponseDto;
+import org.example.bookstore.dto.user.CreateUserRequestDto;
+import org.example.bookstore.dto.user.UserDto;
+import org.example.bookstore.dto.user.UserLoginRequestDto;
+import org.example.bookstore.dto.user.UserLoginResponseDto;
 import org.example.bookstore.exception.RegistrationException;
 import org.example.bookstore.security.AuthenticationService;
 import org.example.bookstore.service.UserService;
@@ -28,7 +28,7 @@ public class AuthenticationController {
     @PostMapping("/register")
     public UserDto register(@RequestBody @Valid CreateUserRequestDto createUserRequestDto)
             throws RegistrationException {
-        return userService.save(createUserRequestDto);
+        return userService.register(createUserRequestDto);
     }
 
     @Operation(summary = "Login a user")

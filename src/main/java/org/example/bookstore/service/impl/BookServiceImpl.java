@@ -3,9 +3,9 @@ package org.example.bookstore.service.impl;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.example.bookstore.dto.BookDto;
-import org.example.bookstore.dto.BookDtoWithoutCategoryIds;
-import org.example.bookstore.dto.CreateBookRequestDto;
+import org.example.bookstore.dto.book.BookDto;
+import org.example.bookstore.dto.book.BookDtoWithoutCategoryIds;
+import org.example.bookstore.dto.book.CreateBookRequestDto;
 import org.example.bookstore.exception.EntityNotFoundException;
 import org.example.bookstore.mapper.BookMapper;
 import org.example.bookstore.model.Book;
@@ -37,10 +37,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDto findById(Long id) {
-        Optional<Book> bookOptional = bookRepository.findByIdWithCategories(id);
-        return bookOptional.map(bookMapper::toDto).orElseThrow(() -> new EntityNotFoundException(
-                "Book with id: %d not found".formatted(id)));
+    public BookDto getBookDtoById(Long id) {
+        Book book = findBookById(id);
+        return bookMapper.toDto(book);
     }
 
     @Override
@@ -64,6 +63,13 @@ public class BookServiceImpl implements BookService {
                 .stream()
                 .map(bookMapper::toDtoWithoutCategoryIds)
                 .toList();
+    }
+
+    @Override
+    public Book findBookById(Long id) {
+        Optional<Book> bookOptional = bookRepository.findByIdWithCategories(id);
+        return bookOptional.orElseThrow(() -> new EntityNotFoundException(
+                "Book with id: %d not found".formatted(id)));
     }
 
     private void checkIfBookExistsById(Long id) {

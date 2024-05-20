@@ -1,8 +1,8 @@
 package org.example.bookstore.service;
 
 import java.util.List;
-import org.example.bookstore.dto.CategoryDto;
-import org.example.bookstore.dto.CreateCategoryRequestDto;
+import org.example.bookstore.dto.category.CategoryDto;
+import org.example.bookstore.dto.category.CreateCategoryRequestDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 

@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-shopping-cart-table
+      author: VolandevlodD
+      changes:
+        - createTable:
+            tableName: shopping_carts
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    referencedColumnNames: id
+                    referencedTableName: users
+                    foreignKeyName: fk_shopping_cart_user_id
+              - column:
+                  name: deleted
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false

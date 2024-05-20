@@ -1,4 +1,4 @@
-package org.example.bookstore.dto;
+package org.example.bookstore.dto.category;
 
 public record CategoryDto(
         Long id,
