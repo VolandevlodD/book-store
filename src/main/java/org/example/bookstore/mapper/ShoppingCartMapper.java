@@ -12,6 +12,6 @@ import org.springframework.stereotype.Component;
 public interface ShoppingCartMapper {
     @Mapping(target = "id", source = "user", qualifiedByName = "userIdExtractor")
     @Mapping(target = "userId", source = "user", qualifiedByName = "userIdExtractor")
-    @Mapping(target = "cartItems", source = "items", qualifiedByName = "fromItemsToDtos")
+    @Mapping(target = "cartItems", source = "items", qualifiedByName = "fromCartItemsToDtos")
     ShoppingCartDto toDto(ShoppingCart shoppingCart);
 }

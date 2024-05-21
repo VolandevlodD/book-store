@@ -10,4 +10,6 @@ public interface ShoppingCartService {
     ShoppingCart getShoppingCartByUserId(Long userId);
 
     ShoppingCartDto getShoppingCartDtoByUserId(Long userId);
+
+    void clearShoppingCart(Long userId);
 }

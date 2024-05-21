@@ -16,7 +16,7 @@ public interface CartItemMapper {
     @Mapping(target = "bookId", source = "book", qualifiedByName = "bookIdExtractor")
     CartItemDto toDto(CartItem cartItem);
 
-    @Named("fromItemsToDtos")
+    @Named("fromCartItemsToDtos")
     default Set<CartItemDto> toDtos(Set<CartItem> items) {
         return items.stream()
                 .map(this::toDto)

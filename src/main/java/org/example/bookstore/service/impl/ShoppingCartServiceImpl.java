@@ -7,6 +7,7 @@ import org.example.bookstore.exception.EntityNotFoundException;
 import org.example.bookstore.mapper.ShoppingCartMapper;
 import org.example.bookstore.model.ShoppingCart;
 import org.example.bookstore.model.User;
+import org.example.bookstore.repository.CartItemRepository;
 import org.example.bookstore.repository.ShoppingCartRepository;
 import org.example.bookstore.service.ShoppingCartService;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     private final ShoppingCartRepository shoppingCartRepository;
     private final ShoppingCartMapper shoppingCartMapper;
+    private final CartItemRepository cartItemRepository;
 
     @Override
     public void createShoppingCart(User user) {
@@ -37,5 +39,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public ShoppingCartDto getShoppingCartDtoByUserId(Long userId) {
         ShoppingCart cart = getShoppingCartByUserId(userId);
         return shoppingCartMapper.toDto(cart);
+    }
+
+    @Override
+    public void clearShoppingCart(Long userId) {
+        ShoppingCart cart = getShoppingCartByUserId(userId);
+        cartItemRepository.deleteAll(cart.getItems());
     }
 }
