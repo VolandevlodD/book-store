@@ -36,7 +36,6 @@ public class OrderController {
         return orderService.getAll(userId);
     }
 
-
     @Operation(summary = "Add an order", description = "Add a new order")
     @PostMapping
     @PreAuthorize("hasRole('USER')")
