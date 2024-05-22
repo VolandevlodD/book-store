@@ -61,7 +61,8 @@ public class CustomGlobalExceptionHandler {
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+    public ResponseEntity<Object> handleHttpMessageNotReadableException(
+            HttpMessageNotReadableException ex) {
         log.error("HttpMessageNotReadableException occurred", ex);
         return getResponseEntity(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
