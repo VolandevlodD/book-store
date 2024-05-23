@@ -13,6 +13,7 @@ import org.example.bookstore.repository.CartItemRepository;
 import org.example.bookstore.service.BookService;
 import org.example.bookstore.service.CartItemService;
 import org.example.bookstore.service.ShoppingCartService;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,12 +43,15 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     @Override
-    public CartItemDto update(UpdateCartItemRequestDto requestDto, Long cartItemId) {
+    public CartItemDto update(UpdateCartItemRequestDto requestDto, Long cartItemId, Long userId) {
         checkIfExistsById(cartItemId);
-        CartItem cartItem = cartItemRepository.findById(cartItemId).get();
+        CartItem cartItem = cartItemRepository.findByIdWithBookAndShoppingCart(cartItemId).get();
+        if (!cartItem.getShoppingCart().getId().equals(userId)) {
+            throw new AccessDeniedException("Access denied");
+        }
         cartItem.setQuantity(requestDto.quantity());
-        CartItem dbCartItem = cartItemRepository.save(cartItem);
-        return cartItemMapper.toDto(dbCartItem);
+        cartItemRepository.save(cartItem);
+        return cartItemMapper.toDto(cartItem);
     }
 
     private void checkIfExistsById(Long id) {

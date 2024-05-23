@@ -28,11 +28,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart getShoppingCartByUserId(Long userId) {
-        Optional<ShoppingCart> cartOptional = shoppingCartRepository.findByUserId(userId);
-        return cartOptional
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "Shopping cart not found for userId: " + userId)
-                );
+        Optional<ShoppingCart> cartOptional =
+                shoppingCartRepository.findByUserIdWithItemsWithBooks(userId);
+        return cartOptional.orElseThrow(() -> new EntityNotFoundException(
+                "Shopping cart not found for userId: " + userId));
     }
 
     @Override
