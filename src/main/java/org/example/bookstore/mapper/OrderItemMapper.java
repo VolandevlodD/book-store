@@ -23,6 +23,7 @@ public interface OrderItemMapper {
         return items.stream().map(this::toDto).collect(Collectors.toSet());
     }
 
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "order", ignore = true)
     @Mapping(target = "price", source = "book", qualifiedByName = "bookPriceExtractor")
     OrderItem toOrderItemFromCartItem(CartItem cartItem);

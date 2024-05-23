@@ -52,10 +52,10 @@ public class OrderServiceImpl implements OrderService {
         if (cartItems.isEmpty()) {
             throw new EmptyCartException("Cannot create order with an empty cart");
         }
-        Order newOrder = createAndSaveOrder(orderRequest, userId, cartItems);
-        Set<OrderItem> orderItems = createAndSaveOrderItems(cartItems, newOrder);
-        newOrder.setOrderItems(orderItems);
+
+        Order newOrder = createAndSaveAnOrder(orderRequest, userId, cartItems);
         shoppingCartService.clearShoppingCart(userId);
+
         return orderMapper.toDto(newOrder);
     }
 
@@ -88,31 +88,35 @@ public class OrderServiceImpl implements OrderService {
         return orderItemMapper.toDto(orderItem);
     }
 
-    private Set<OrderItem> createAndSaveOrderItems(Set<CartItem> cartItems, Order newOrder) {
+    private Order createAndSaveAnOrder(CreateOrderRequestDto orderRequest, Long userId,
+                                       Set<CartItem> cartItems) {
+        Order newOrder = new Order();
+        newOrder.setStatus(Order.Status.PENDING);
+        newOrder.setOrderDate(LocalDateTime.now());
+        newOrder.setShippingAddress(orderRequest.shippingAddress());
+
+        User user = new User();
+        user.setId(userId);
+        newOrder.setUser(user);
+        newOrder.setTotal(calculateTotalPrice(cartItems));
+
         Set<OrderItem> orderItems = cartItems.stream()
-                .map(orderItemMapper::toOrderItemFromCartItem)
+                .map(cartItem -> {
+                    OrderItem orderItem = orderItemMapper.toOrderItemFromCartItem(cartItem);
+                    orderItem.setOrder(newOrder);
+                    return orderItem;
+                })
                 .collect(Collectors.toSet());
-        orderItems.forEach(orderItem -> orderItem.setOrder(newOrder));
-        return orderItems;
+
+        newOrder.setOrderItems(orderItems);
+        orderRepository.save(newOrder);
+        return newOrder;
     }
 
     private void checkIfOrderBelongsToUser(Order order, Long userId) {
         if (!order.getUser().getId().equals(userId)) {
             throw new AccessDeniedException("You are not authorized to view this order");
         }
-    }
-
-    private Order createAndSaveOrder(CreateOrderRequestDto orderRequest, Long userId,
-                                     Set<CartItem> cartItems) {
-        Order newOrder = new Order();
-        newOrder.setStatus(Order.Status.PENDING);
-        newOrder.setOrderDate(LocalDateTime.now());
-        newOrder.setShippingAddress(orderRequest.shippingAddress());
-        User user = new User();
-        user.setId(userId);
-        newOrder.setUser(user);
-        newOrder.setTotal(calculateTotalPrice(cartItems));
-        return orderRepository.save(newOrder);
     }
 
     private BigDecimal calculateTotalPrice(Set<CartItem> cartItems) {
