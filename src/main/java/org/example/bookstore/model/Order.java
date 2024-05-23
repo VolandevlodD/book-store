@@ -8,8 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -29,7 +29,7 @@ public class Order {
     private Long id;
 
     @JoinColumn(name = "user_id", nullable = false)
-    @OneToOne
+    @ManyToOne
     private User user;
 
     @Column(nullable = false)
@@ -49,10 +49,6 @@ public class Order {
     private Set<OrderItem> orderItems;
 
     public enum Status {
-        PENDING,
-        PROCESSING,
-        SHIPPED,
-        DELIVERED,
-        CANCELED
+        PENDING, PROCESSING, SHIPPED, DELIVERED, CANCELED
     }
 }

@@ -1,5 +1,6 @@
 package org.example.bookstore.mapper;
 
+import java.math.BigDecimal;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.example.bookstore.config.MapperConfig;
@@ -54,6 +55,11 @@ public interface BookMapper {
     @Named("bookTitleExtractor")
     default String extractBookTitle(Book book) {
         return book.getTitle();
+    }
+
+    @Named("bookPriceExtractor")
+    default BigDecimal extractBookPrice(Book book) {
+        return book.getPrice();
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.example.bookstore.config.MapperConfig;
 import org.example.bookstore.dto.orderitem.OrderItemDto;
+import org.example.bookstore.model.CartItem;
 import org.example.bookstore.model.OrderItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,4 +22,8 @@ public interface OrderItemMapper {
     default Set<OrderItemDto> toDtos(Set<OrderItem> items) {
         return items.stream().map(this::toDto).collect(Collectors.toSet());
     }
+
+    @Mapping(target = "order", ignore = true)
+    @Mapping(target = "price", source = "book", qualifiedByName = "bookPriceExtractor")
+    OrderItem toOrderItemFromCartItem(CartItem cartItem);
 }

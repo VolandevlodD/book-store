@@ -13,7 +13,6 @@ import org.example.bookstore.exception.EmptyCartException;
 import org.example.bookstore.exception.EntityNotFoundException;
 import org.example.bookstore.mapper.OrderItemMapper;
 import org.example.bookstore.mapper.OrderMapper;
-import org.example.bookstore.model.Book;
 import org.example.bookstore.model.CartItem;
 import org.example.bookstore.model.Order;
 import org.example.bookstore.model.OrderItem;
@@ -91,10 +90,9 @@ public class OrderServiceImpl implements OrderService {
 
     private Set<OrderItem> createAndSaveOrderItems(Set<CartItem> cartItems, Order newOrder) {
         Set<OrderItem> orderItems = cartItems.stream()
-                .map(this::convertToOrderItem)
+                .map(orderItemMapper::toOrderItemFromCartItem)
                 .collect(Collectors.toSet());
         orderItems.forEach(orderItem -> orderItem.setOrder(newOrder));
-        orderItemRepository.saveAll(orderItems);
         return orderItems;
     }
 
@@ -122,15 +120,5 @@ public class OrderServiceImpl implements OrderService {
                 .map(cartItem -> cartItem.getBook().getPrice()
                         .multiply(BigDecimal.valueOf(cartItem.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-    private OrderItem convertToOrderItem(CartItem cartItem) {
-        OrderItem orderItem = new OrderItem();
-        Book book = cartItem.getBook();
-        Integer quantity = cartItem.getQuantity();
-        orderItem.setBook(book);
-        orderItem.setQuantity(quantity);
-        orderItem.setPrice(book.getPrice());
-        return orderItem;
     }
 }

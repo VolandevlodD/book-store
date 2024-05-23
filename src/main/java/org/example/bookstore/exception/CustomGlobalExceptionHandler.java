@@ -9,7 +9,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -52,12 +51,6 @@ public class CustomGlobalExceptionHandler {
     public ResponseEntity<Object> handleEmptyCartException(EmptyCartException ex) {
         log.error("EmptyCartException occurred:", ex);
         return getResponseEntity(HttpStatus.BAD_REQUEST, ex.getMessage());
-    }
-
-    @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex) {
-        log.error("AccessDeniedException occurred:", ex);
-        return getResponseEntity(HttpStatus.FORBIDDEN, ex.getMessage());
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
