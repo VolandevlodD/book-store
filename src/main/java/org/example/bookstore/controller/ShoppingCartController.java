@@ -2,6 +2,7 @@ package org.example.bookstore.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.bookstore.dto.cartitem.CartItemDto;
 import org.example.bookstore.dto.cartitem.CreateCartItemRequestDto;
@@ -45,7 +46,7 @@ public class ShoppingCartController {
     @PostMapping
     @PreAuthorize("hasRole('USER')")
     public CartItemDto addToCart(Authentication authentication,
-                                 @RequestBody CreateCartItemRequestDto requestDto) {
+                                 @RequestBody @Valid CreateCartItemRequestDto requestDto) {
         Long userId = getUserIdFromAuthentication(authentication);
         return cartItemService.save(requestDto, userId);
     }
@@ -54,9 +55,10 @@ public class ShoppingCartController {
             + "shopping cart for the authenticated user")
     @PutMapping("/cart-items/{cartItemId}")
     @PreAuthorize("hasRole('USER')")
-    public CartItemDto updateCart(@RequestBody UpdateCartItemRequestDto requestDto,
-                                  @PathVariable Long cartItemId) {
-        return cartItemService.update(requestDto, cartItemId);
+    public CartItemDto updateCart(@RequestBody @Valid UpdateCartItemRequestDto requestDto,
+                                  @PathVariable Long cartItemId, Authentication authentication) {
+        Long userId = getUserIdFromAuthentication(authentication);
+        return cartItemService.update(requestDto, cartItemId, userId);
     }
 
     @Operation(summary = "Delete a cart item", description = "Remove an item from the shopping "

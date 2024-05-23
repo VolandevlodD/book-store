@@ -9,5 +9,5 @@ public interface CartItemService {
 
     void deleteById(Long id);
 
-    CartItemDto update(UpdateCartItemRequestDto requestDto, Long userId);
+    CartItemDto update(UpdateCartItemRequestDto requestDto, Long cartItemId, Long userId);
 }
