@@ -3,15 +3,16 @@ package org.example.bookstore.mapper;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.example.bookstore.config.MapperConfig;
-import org.example.bookstore.dto.BookDto;
-import org.example.bookstore.dto.BookDtoWithoutCategoryIds;
-import org.example.bookstore.dto.CreateBookRequestDto;
+import org.example.bookstore.dto.book.BookDto;
+import org.example.bookstore.dto.book.BookDtoWithoutCategoryIds;
+import org.example.bookstore.dto.book.CreateBookRequestDto;
 import org.example.bookstore.model.Book;
 import org.example.bookstore.model.Category;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -44,4 +45,15 @@ public interface BookMapper {
                 .collect(Collectors.toSet());
         book.setCategories(categories);
     }
+
+    @Named("bookIdExtractor")
+    default Long extractBookId(Book book) {
+        return book.getId();
+    }
+
+    @Named("bookTitleExtractor")
+    default String extractBookTitle(Book book) {
+        return book.getTitle();
+    }
+
 }

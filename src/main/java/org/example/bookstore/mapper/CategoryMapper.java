@@ -1,8 +1,8 @@
 package org.example.bookstore.mapper;
 
 import org.example.bookstore.config.MapperConfig;
-import org.example.bookstore.dto.CategoryDto;
-import org.example.bookstore.dto.CreateCategoryRequestDto;
+import org.example.bookstore.dto.category.CategoryDto;
+import org.example.bookstore.dto.category.CreateCategoryRequestDto;
 import org.example.bookstore.model.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

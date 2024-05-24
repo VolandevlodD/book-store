@@ -5,9 +5,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.example.bookstore.dto.BookDto;
-import org.example.bookstore.dto.BookDtoWithoutCategoryIds;
-import org.example.bookstore.dto.CreateBookRequestDto;
+import org.example.bookstore.dto.book.BookDto;
+import org.example.bookstore.dto.book.BookDtoWithoutCategoryIds;
+import org.example.bookstore.dto.book.CreateBookRequestDto;
 import org.example.bookstore.service.BookService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -41,7 +41,7 @@ public class BookController {
             + " ID")
     @GetMapping("/{id}")
     public BookDto getBookById(@PathVariable Long id) {
-        return bookService.findById(id);
+        return bookService.getBookDtoById(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
