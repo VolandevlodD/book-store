@@ -6,6 +6,7 @@ import org.example.bookstore.dto.user.UserDto;
 import org.example.bookstore.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,4 +18,9 @@ public interface UserMapper {
     @Mapping(target = "roles", ignore = true)
     @Mapping(target = "authorities", ignore = true)
     User toModel(CreateUserRequestDto createUserRequestDto);
+
+    @Named("userIdExtractor")
+    default Long extractUserId(User user) {
+        return user != null ? user.getId() : null;
+    }
 }
