@@ -12,6 +12,7 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -44,4 +45,15 @@ public interface BookMapper {
                 .collect(Collectors.toSet());
         book.setCategories(categories);
     }
+
+    @Named("bookIdExtractor")
+    default Long extractBookId(Book book) {
+        return book.getId();
+    }
+
+    @Named("bookTitleExtractor")
+    default String extractBookTitle(Book book) {
+        return book.getTitle();
+    }
+
 }
