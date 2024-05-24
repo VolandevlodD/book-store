@@ -12,10 +12,10 @@ import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 @Component
-@Mapper(config = MapperConfig.class, uses = {BookMapper.class})
+@Mapper(config = MapperConfig.class)
 public interface OrderItemMapper {
 
-    @Mapping(target = "bookId", source = "book", qualifiedByName = "bookIdExtractor")
+    @Mapping(target = "bookId", source = "book.id")
     OrderItemDto toDto(OrderItem orderItem);
 
     @Named("fromOrderItemsToDtos")
@@ -25,6 +25,6 @@ public interface OrderItemMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "order", ignore = true)
-    @Mapping(target = "price", source = "book", qualifiedByName = "bookPriceExtractor")
+    @Mapping(target = "price", source = "book.price")
     OrderItem toOrderItemFromCartItem(CartItem cartItem);
 }

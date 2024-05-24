@@ -8,9 +8,9 @@ import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 @Component
-@Mapper(config = MapperConfig.class, uses = {UserMapper.class, OrderItemMapper.class})
+@Mapper(config = MapperConfig.class, uses = {OrderItemMapper.class})
 public interface OrderMapper {
-    @Mapping(target = "userId", source = "user", qualifiedByName = "userIdExtractor")
+    @Mapping(target = "userId", source = "user.id")
     @Mapping(target = "orderItems", source = "orderItems", qualifiedByName = "fromOrderItemsToDtos")
     OrderDto toDto(Order order);
 }

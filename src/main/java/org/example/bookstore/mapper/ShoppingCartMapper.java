@@ -8,10 +8,10 @@ import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 @Component
-@Mapper(config = MapperConfig.class, uses = {UserMapper.class, CartItemMapper.class})
+@Mapper(config = MapperConfig.class, uses = {CartItemMapper.class})
 public interface ShoppingCartMapper {
-    @Mapping(target = "id", source = "user", qualifiedByName = "userIdExtractor")
-    @Mapping(target = "userId", source = "user", qualifiedByName = "userIdExtractor")
+    @Mapping(target = "id", source = "user.id")
+    @Mapping(target = "userId", source = "user.id")
     @Mapping(target = "cartItems", source = "items", qualifiedByName = "fromCartItemsToDtos")
     ShoppingCartDto toDto(ShoppingCart shoppingCart);
 }

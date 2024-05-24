@@ -1,6 +1,5 @@
 package org.example.bookstore.mapper;
 
-import java.math.BigDecimal;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.example.bookstore.config.MapperConfig;
@@ -13,7 +12,6 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -46,20 +44,4 @@ public interface BookMapper {
                 .collect(Collectors.toSet());
         book.setCategories(categories);
     }
-
-    @Named("bookIdExtractor")
-    default Long extractBookId(Book book) {
-        return book.getId();
-    }
-
-    @Named("bookTitleExtractor")
-    default String extractBookTitle(Book book) {
-        return book.getTitle();
-    }
-
-    @Named("bookPriceExtractor")
-    default BigDecimal extractBookPrice(Book book) {
-        return book.getPrice();
-    }
-
 }

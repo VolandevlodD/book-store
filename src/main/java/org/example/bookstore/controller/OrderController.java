@@ -2,6 +2,7 @@ package org.example.bookstore.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.example.bookstore.dto.order.CreateOrderRequestDto;
@@ -39,7 +40,7 @@ public class OrderController {
     @Operation(summary = "Add an order", description = "Add a new order")
     @PostMapping
     @PreAuthorize("hasRole('USER')")
-    public OrderDto addOrder(@RequestBody CreateOrderRequestDto requestDto,
+    public OrderDto addOrder(@RequestBody @Valid CreateOrderRequestDto requestDto,
                              Authentication authentication) {
         Long userId = getUserIdFromAuthentication(authentication);
         return orderService.createOrder(requestDto, userId);
@@ -49,7 +50,7 @@ public class OrderController {
     @PatchMapping("/{orderId}")
     @PreAuthorize("hasRole('ADMIN')")
     public OrderDto updateOrderStatus(@PathVariable Long orderId,
-                                      @RequestBody UpdateOrderStatusRequestDto requestDto) {
+                                      @RequestBody @Valid UpdateOrderStatusRequestDto requestDto) {
         return orderService.updateOrderStatus(orderId, requestDto);
     }
 
