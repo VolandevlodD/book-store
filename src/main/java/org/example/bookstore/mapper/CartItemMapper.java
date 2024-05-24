@@ -9,14 +9,14 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-@Mapper(config = MapperConfig.class, uses = BookMapper.class)
+@Mapper(config = MapperConfig.class)
 public interface CartItemMapper {
 
-    @Mapping(target = "bookTitle", source = "book", qualifiedByName = "bookTitleExtractor")
-    @Mapping(target = "bookId", source = "book", qualifiedByName = "bookIdExtractor")
+    @Mapping(target = "bookTitle", source = "book.title")
+    @Mapping(target = "bookId", source = "book.id")
     CartItemDto toDto(CartItem cartItem);
 
-    @Named("fromItemsToDtos")
+    @Named("fromCartItemsToDtos")
     default Set<CartItemDto> toDtos(Set<CartItem> items) {
         return items.stream()
                 .map(this::toDto)
