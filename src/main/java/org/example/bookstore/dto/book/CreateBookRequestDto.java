@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 import lombok.Data;
 import org.hibernate.validator.constraints.ISBN;
 
@@ -24,6 +24,6 @@ public class CreateBookRequestDto {
     private String description;
     private String coverImage;
     @NotEmpty(message = "Category IDs cannot be empty")
-    private List<@PositiveOrZero(
+    private Set<@PositiveOrZero(
             message = "Category ID must be positive or zero") Long> categoryIds;
 }

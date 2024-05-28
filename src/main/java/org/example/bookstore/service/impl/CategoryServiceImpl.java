@@ -1,7 +1,9 @@
 package org.example.bookstore.service.impl;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.example.bookstore.dto.category.CategoryDto;
 import org.example.bookstore.dto.category.CreateCategoryRequestDto;
@@ -59,6 +61,16 @@ public class CategoryServiceImpl implements CategoryService {
     public void checkIfCategoryExistsById(Long id) {
         if (!categoryRepository.existsById(id)) {
             throw new EntityNotFoundException("Category with id %d not found".formatted(id));
+        }
+    }
+
+    public void checkIfCategoriesExistsByIds(Set<Long> ids) {
+        Set<Long> existingIds = categoryRepository.findExistingIdsByIdIn(ids);
+        Set<Long> missingIds = new HashSet<>(ids);
+        missingIds.removeAll(existingIds);
+
+        if (!missingIds.isEmpty()) {
+            throw new EntityNotFoundException("Categories with ID's " + missingIds + " not found");
         }
     }
 }
