@@ -39,7 +39,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ShoppingCart cart = getShoppingCartByUserId(userId);
         return shoppingCartMapper.toDto(cart);
     }
-  
+
     @Override
     public void clearShoppingCart(Long userId) {
         ShoppingCart cart = getShoppingCartByUserId(userId);
