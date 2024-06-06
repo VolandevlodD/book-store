@@ -180,7 +180,7 @@ You can fork and use the Postman collection by clicking the button below:
 
 Explore the features of our API in this video:
 
-<a href="https://www.loom.com/share/your-video-id">
+<a href="https://www.loom.com/share/6087c921354845a594cd3f153701817b?sid=e655d459-f47b-4f81-bd50-163275ea0bfe">
   <img src="src/img/Loom_logo_lockup_color_white.png" alt="Watch the Video" width="333">
 </a>
 
