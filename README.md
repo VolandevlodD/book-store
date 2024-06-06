@@ -26,14 +26,69 @@ Welcome to the Book Store API! This project serves as the backbone for an online
 - **Docker**: For containerizing the application.
 - **JUnit**: For unit testing.
 - **Mockito**: For mocking in tests.
+- **Testcontainers**: For providing lightweight, disposable containers for integration testing, ensuring consistent and isolated test environments.
 - **Maven**: For project management and dependency management.
 
 ## 🚀 Features and Functionality
 
 ### Authentication
 
-- **Register user**: `POST /api/auth/register`
-- **Login user**: `POST /api/auth/login`
+#### Register User
+- **Endpoint:** `POST /api/auth/register`
+- **Description:** Registers a new user in the application.
+- **Request Body:**
+  ```json
+  {
+    "email": "rick.sanchez@universe.com",
+    "password": "superpass",
+    "repeatPassword": "superpass",
+    "firstName": "Rick",
+    "lastName": "Sanchez",
+    "shippingAddress": "Washington, USA, Earth"
+  }            
+  ```
+#### Login User
+- **Endpoint:** `POST /api/auth/login`
+- **Description:** Logs in an existing user and returns a token.
+- **Request Body:**
+  ```json
+  {
+    "email": "mohinder@example.com",
+    "password": "superpass"
+  }
+  ```
+#### Login Admin
+- **Endpoint:** `POST /api/auth/login`
+- **Description:** Logs in an admin user and returns a token.
+- **Request Body:**
+  ```json
+  {
+    "email": "john.doe@example.com",
+    "password": "superpass"
+  }
+  ```
+#### Usage of Tokens
+
+Once a user or admin logs in, they receive a token that must be used to access protected endpoints. There are two ways to use this token:
+
+1. **Bearer Token Authentication:**
+    - Include the token in the `Authorization` header of your requests.
+    - Example:
+      ```http
+      GET /api/protected-endpoint
+      Authorization: Bearer jwt_token_here
+      ```
+
+2. **Basic Authentication:**
+    - Include the credentials in the `Authorization` header of your requests in the format `Basic base64(email:password)`.
+    - Example:
+      ```http
+      GET /api/protected-endpoint
+      Authorization: Basic base64_encoded_credentials
+      ```
+
+#### Testing Credentials
+- **The credentials provided above can be used for testing purposes.**
 
 ### Books
 
@@ -121,10 +176,18 @@ You can fork and use the Postman collection by clicking the button below:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://elements.getpostman.com/redirect?entityId=34424490-af10ac7b-7259-4f1f-ba60-74feb53d9ea4&entityType=collection)
 
-## 📫 Video Overview
+## 📺 Video Overview
 
 Explore the features of our API in this video:
 
 <a href="https://www.loom.com/share/your-video-id">
   <img src="src/img/Loom_logo_lockup_color_white.png" alt="Watch the Video" width="333">
 </a>
+
+## 🛜Connect with Me
+
+Feel free to connect with me on LinkedIn:
+
+[![Connect with me on LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/vladyslav-radko-51b334301/)
+
+I'm always open to networking and discussing new opportunities!
