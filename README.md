@@ -124,7 +124,7 @@ Once a user or admin logs in, they receive a token that must be used to access p
 
 ## ⏬ Installation
 
-Follow these steps to run Infinite Pages:
+Follow these steps to run application:
 
 1. **Clone the repository**:
    ```bash
