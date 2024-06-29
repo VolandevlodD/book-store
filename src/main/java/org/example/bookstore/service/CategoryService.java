@@ -1,6 +1,7 @@
 package org.example.bookstore.service;
 
 import java.util.List;
+import java.util.Set;
 import org.example.bookstore.dto.category.CategoryDto;
 import org.example.bookstore.dto.category.CreateCategoryRequestDto;
 import org.springframework.data.domain.Pageable;
@@ -19,4 +20,6 @@ public interface CategoryService {
     void deleteById(Long id);
 
     void checkIfCategoryExistsById(Long id);
+
+    void checkIfCategoriesExistsByIds(Set<Long> ids);
 }

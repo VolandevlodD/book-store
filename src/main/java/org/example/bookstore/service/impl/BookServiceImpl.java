@@ -2,6 +2,7 @@ package org.example.bookstore.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.example.bookstore.dto.book.BookDto;
 import org.example.bookstore.dto.book.BookDtoWithoutCategoryIds;
@@ -24,7 +25,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto save(CreateBookRequestDto requestDto) {
-        Book book = bookRepository.save(bookMapper.toModel(requestDto));
+        Set<Long> categoryIds = requestDto.getCategoryIds();
+        categoryService.checkIfCategoriesExistsByIds(categoryIds);
+        Book model = bookMapper.toModel(requestDto);
+        Book book = bookRepository.save(model);
         return bookMapper.toDto(book);
     }
 
@@ -74,7 +78,7 @@ public class BookServiceImpl implements BookService {
 
     private void checkIfBookExistsById(Long id) {
         if (!bookRepository.existsById(id)) {
-            throw new EntityNotFoundException("Book with id %d not found".formatted(id));
+            throw new EntityNotFoundException("Book with id: %d not found".formatted(id));
         }
     }
 }
